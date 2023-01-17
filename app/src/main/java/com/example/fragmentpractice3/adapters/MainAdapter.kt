@@ -7,6 +7,14 @@ import com.example.fragmentpractice3.fragments.FirstFragment
 import com.example.fragmentpractice3.fragments.SecondFragment
 
 class MainAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+
+    override fun getPageTitle(position: Int): CharSequence? {
+        return when(position){
+            0-> "프래그먼트1"
+            else -> "프래그먼트2"
+        }
+    }
+
     override fun getCount(): Int {
         return 2
     }
