@@ -42,7 +42,7 @@
         app:layout_constraintStart_toStartOf="@id/categoriePageMainTextView"
         app:layout_constraintEnd_toEndOf="@id/mainPageUserInfo"/>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/categoriePageListLayout"
         android:layout_width="300dp"
         android:layout_height="300dp"
@@ -53,10 +53,92 @@
         app:layout_constraintStart_toStartOf="@id/categorieSearchBar"
         app:layout_constraintEnd_toEndOf="@id/categorieSearchBar">
 
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/mediImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_account_circle_36"
+            app:layout_constraintTop_toTopOf="@id/categoriePageListLayout"
+            app:layout_constraintStart_toStartOf="@id/categoriePageListLayout"/>
+        <TextView
+            android:id="@+id/categoriPageMediListLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="약"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/mediImageView"
+            app:layout_constraintStart_toEndOf="@id/mediImageView"
+            app:layout_constraintBottom_toBottomOf="@id/mediImageView"/>
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/mediImageView"/>
 
 
 
-    </LinearLayout>
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/sportsImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_account_circle_36"
+            app:layout_constraintTop_toTopOf="@id/view1"
+            app:layout_constraintStart_toStartOf="@id/categoriePageListLayout"/>
+        <TextView
+            android:id="@+id/categorieSports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/sportsImageView"
+            app:layout_constraintStart_toStartOf="@id/categoriPageMediListLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/sportsImageView"/>
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/sportsImageView"/>
+
+
+
+
+
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/MaelImageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/baseline_account_circle_36"
+            app:layout_constraintTop_toTopOf="@id/view2"
+            app:layout_constraintStart_toStartOf="@id/categoriePageListLayout"/>
+        <TextView
+            android:id="@+id/categorieMeal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="식사"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/MaelImageView"
+            app:layout_constraintStart_toStartOf="@id/categorieSports"
+            app:layout_constraintBottom_toBottomOf="@+id/MaelImageView"/>
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/MaelImageView"/>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
