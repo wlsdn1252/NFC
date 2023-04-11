@@ -10,8 +10,8 @@ class MainAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when(position){
-            0-> "프래그먼트1"
-            else -> "프래그먼트2"
+            0-> "메인"
+            else -> "키테고리"
         }
     }
 

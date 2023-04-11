@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/categoriePageMainTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="두번째 프래그머트"
-        android:textSize="30sp"/>
+        android:text="카테고리"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="35sp"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-</LinearLayout>
+    <ImageButton
+        android:id="@+id/mainPageUserInfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/white"
+        android:src="@drawable/baseline_account_circle_48"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.944"
+        app:layout_constraintStart_toEndOf="@id/categoriePageMainTextView"
+        app:layout_constraintTop_toTopOf="@id/categoriePageMainTextView" />
+
+    <SearchView
+        android:id="@+id/categorieSearchBar"
+        android:layout_width="300dp"
+        android:layout_height="30dp"
+        android:background="@drawable/search_round"
+        android:layout_marginTop="30dp"
+        android:queryHint="검색"
+        app:layout_constraintTop_toBottomOf="@id/categoriePageMainTextView"
+        app:layout_constraintStart_toStartOf="@id/categoriePageMainTextView"
+        app:layout_constraintEnd_toEndOf="@id/mainPageUserInfo"/>
+
+    <LinearLayout
+        android:id="@+id/categoriePageListLayout"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/categorie_round"
+        app:layout_constraintTop_toBottomOf="@id/categorieSearchBar"
+        app:layout_constraintStart_toStartOf="@id/categorieSearchBar"
+        app:layout_constraintEnd_toEndOf="@id/categorieSearchBar">
+
+
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
