@@ -8,8 +8,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.fragmentpractice3.LoginActivity
+import com.example.fragmentpractice3.MainActivity
 import com.example.fragmentpractice3.MyInfoActivity
 import com.example.fragmentpractice3.R
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.fragment_second.*
 
 class MyInfoFragment : Fragment() {
@@ -24,6 +26,7 @@ class MyInfoFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+
     }
 
 

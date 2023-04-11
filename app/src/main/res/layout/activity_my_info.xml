@@ -189,7 +189,7 @@
             android:id="@+id/myInfoInfoText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="의견 보내기"
+            android:text="정보"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintTop_toTopOf="@+id/myInfoInfoImoji"
