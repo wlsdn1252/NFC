@@ -1,9 +1,13 @@
 package com.example.fragmentpractice3
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.fragmentpractice3.adapters.MainAdapter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.fragment_fist.*
+import kotlinx.android.synthetic.main.fragment_fist.mainPageUserInfo
+import kotlinx.android.synthetic.main.fragment_second.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -14,9 +18,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         mAdapter = MainAdapter(supportFragmentManager)
-
         mainViewPager.adapter = mAdapter
-
         mainTabLayout.setupWithViewPager(mainViewPager)
+
     }
 }

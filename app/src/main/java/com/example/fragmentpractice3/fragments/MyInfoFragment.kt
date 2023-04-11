@@ -12,14 +12,14 @@ import com.example.fragmentpractice3.MyInfoActivity
 import com.example.fragmentpractice3.R
 import kotlinx.android.synthetic.main.fragment_second.*
 
-class SecondFragment : Fragment() {
+class MyInfoFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_second,container,false)
+        return inflater.inflate(R.layout.activity_my_info,container,false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".MyInfoActivity">
+
+    <ImageButton
+        android:id="@+id/myInfoProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/baseline_account_circle_48"
+        android:background="@color/white"
+        android:padding="7dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_notifications_48"
+        android:background="@color/white"
+        android:padding="7dp"
+        app:layout_constraintTop_toTopOf="@id/myInfoProfile"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <View
+        android:id="@+id/myInfoView1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/myInfoProfile"/>
+    <TextView
+        android:id="@+id/myInfoUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="박세민"
+        android:textSize="30sp"
+        android:padding="20dp"
+        app:layout_constraintTop_toBottomOf="@id/myInfoView1"
+        app:layout_constraintStart_toStartOf="@id/myInfoProfile"/>
+
+    <TextView
+        android:id="@+id/ddd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=">"
+        android:textSize="30sp"
+        app:layout_constraintTop_toTopOf="@id/myInfoUserName"
+        app:layout_constraintStart_toEndOf="@id/myInfoUserName"
+        app:layout_constraintBottom_toBottomOf="@id/myInfoUserName"/>
+
+    <View
+        android:id="@+id/myInfoView2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"
+        app:layout_constraintTop_toBottomOf="@id/myInfoUserName"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/myInfoListLayout"
+        android:layout_width="360dp"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/categorie_round"
+        app:layout_constraintTop_toBottomOf="@id/myInfoView2"
+        app:layout_constraintStart_toStartOf="@id/myInfoView2"
+        app:layout_constraintEnd_toEndOf="@id/myInfoView2">
+
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/myInfoImoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_emoji_emotions_40"
+            app:layout_constraintTop_toTopOf="@id/categoriePageListLayout"
+            app:layout_constraintStart_toStartOf="@id/categoriePageListLayout"/>
+        <TextView
+            android:id="@+id/myInfoImojiText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="내활동"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@id/myInfoImoji"
+            app:layout_constraintStart_toEndOf="@id/myInfoImoji"
+            app:layout_constraintBottom_toBottomOf="@id/myInfoImoji"/>
+        <View
+            android:id="@+id/view1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/myInfoImoji"/>
+
+
+
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/myInfoAnnImoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_notifications_48"
+            app:layout_constraintTop_toTopOf="@id/view1"
+            app:layout_constraintStart_toStartOf="@id/myInfoImoji"/>
+        <TextView
+            android:id="@+id/myInfoAnnText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="공지사항"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/myInfoAnnImoji"
+            app:layout_constraintStart_toStartOf="@id/myInfoImojiText"
+            app:layout_constraintBottom_toBottomOf="@+id/myInfoAnnImoji"/>
+        <View
+            android:id="@+id/view2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/myInfoAnnImoji"/>
+
+
+
+
+
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/myInfoQuestionImoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_help_40"
+            app:layout_constraintTop_toTopOf="@id/view2"
+            app:layout_constraintStart_toStartOf="@id/myInfoImoji"/>
+        <TextView
+            android:id="@+id/myInfoQuestionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="자주 묻는 질문"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/myInfoQuestionImoji"
+            app:layout_constraintStart_toStartOf="@id/myInfoAnnText"
+            app:layout_constraintBottom_toBottomOf="@+id/myInfoQuestionImoji"/>
+        <View
+            android:id="@+id/view3"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/myInfoQuestionImoji"/>
+
+
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/myInfoOpinionImoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_chat_40"
+            app:layout_constraintTop_toTopOf="@id/view3"
+            app:layout_constraintStart_toStartOf="@id/myInfoImoji"/>
+        <TextView
+            android:id="@+id/myInfoOpinionText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="의견 보내기"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/myInfoOpinionImoji"
+            app:layout_constraintStart_toStartOf="@id/myInfoAnnText"
+            app:layout_constraintBottom_toBottomOf="@+id/myInfoOpinionImoji"/>
+        <View
+            android:id="@+id/myInfoView4"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/gray"
+            app:layout_constraintTop_toBottomOf="@id/myInfoOpinionImoji"/>
+
+        <ImageView
+            android:padding="8dp"
+            android:id="@+id/myInfoInfoImoji"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_baseline_error_40"
+            app:layout_constraintTop_toTopOf="@id/myInfoView4"
+            app:layout_constraintStart_toStartOf="@id/myInfoImoji"
+            app:layout_constraintStart_toEndOf="@id/myInfoImoji"/>
+        <TextView
+            android:id="@+id/myInfoInfoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="의견 보내기"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintTop_toTopOf="@+id/myInfoInfoImoji"
+            app:layout_constraintStart_toStartOf="@id/myInfoAnnText"
+            app:layout_constraintBottom_toBottomOf="@+id/myInfoInfoImoji"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
