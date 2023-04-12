@@ -1,6 +1,8 @@
 package com.example.fragmentpractice3
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.fragmentpractice3.adapters.MainAdapter
@@ -20,6 +22,15 @@ class MainActivity : AppCompatActivity() {
         mAdapter = MainAdapter(supportFragmentManager)
         mainViewPager.adapter = mAdapter
         mainTabLayout.setupWithViewPager(mainViewPager)
+        //getData()
 
     }
+
+    fun getData(){
+        with(getSharedPreferences(USER_TIMEINFO, Context.MODE_PRIVATE)){
+            mediText.text = getString(HOUR, "아직 데이터가 없음")
+            mediTimeText.text = getString(MIN, "아직 데이터가 없음")
+        }
+    }
+
 }
