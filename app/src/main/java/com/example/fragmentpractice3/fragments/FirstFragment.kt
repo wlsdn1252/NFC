@@ -1,5 +1,7 @@
 package com.example.fragmentpractice3.fragments
 
+import android.app.AlarmManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -27,7 +29,6 @@ class FirstFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         clickGoToMyInfo()
         mainPageEdit()
-
 
 
     }
@@ -60,13 +61,14 @@ class FirstFragment : Fragment() {
     fun getData(){
         with(requireContext().getSharedPreferences(USER_TIMEINFO, Context.MODE_PRIVATE)){
 
-            var h = getString(com.example.fragmentpractice3.HOUR, "아직 데이터가 없음")
-            var m = getString(com.example.fragmentpractice3.MIN, "노데이터")
+            var h = getString(com.example.fragmentpractice3.HOUR, "아직 데이터가 없음")?.toInt()
+            var m = getString(com.example.fragmentpractice3.MIN, "노데이터")?.toInt()
 
-            mediTimeText.setText("${h}:${m}")
+            if(m != null){
+                if(m < 10) mediTimeText.setText("${h}:0${m}")
+                else mediTimeText.setText("${h}:${m}")
+            }
             if(mediTimeText.text.isNotEmpty()) mediTimeText2.setText("${h}:${m}")
-
-
 
 //            // TextView에 값이 있으면 부모 뷰그룹에 추가한다
 //            if (mediTimeText.text.isNotEmpty()) {

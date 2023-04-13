@@ -1,15 +1,12 @@
 package com.example.fragmentpractice3
 
+
 import android.content.Context
-import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.fragmentpractice3.adapters.MainAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_fist.*
-import kotlinx.android.synthetic.main.fragment_fist.mainPageUserInfo
-import kotlinx.android.synthetic.main.fragment_second.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,5 +29,7 @@ class MainActivity : AppCompatActivity() {
             mediTimeText.text = getString(MIN, "아직 데이터가 없음")
         }
     }
+
+
 
 }
