@@ -1,17 +1,14 @@
 package com.example.fragmentpractice3.fragments
 
-import android.app.AlarmManager
-import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.fragmentpractice3.*
-import kotlinx.android.synthetic.main.fragment_fist.*
+import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
 
@@ -20,7 +17,7 @@ class FirstFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_fist,container,false)
+        return inflater.inflate(R.layout.fragment_first,container,false)
     }
 
 
@@ -58,7 +55,7 @@ class FirstFragment : Fragment() {
     }
 
     // 알람 편집 후 알람 데이터 들고오가
-    fun getData(){
+ /*   fun getData(){
         with(requireContext().getSharedPreferences(USER_TIMEINFO, Context.MODE_PRIVATE)){
 
             var h = getString(com.example.fragmentpractice3.HOUR, "아직 데이터가 없음")?.toInt()
@@ -82,7 +79,5 @@ class FirstFragment : Fragment() {
 //                textView.setText("${h}:${m}")
 //
 //                parentLayout.addView(textView)
-//            }
+//            }*/
         }
-    }
-}
