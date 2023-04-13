@@ -21,7 +21,7 @@ class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetList
         //getTimeData()
 
         // 알람 설정
-        okButton.setOnClickListener{
+        editAddTmage.setOnClickListener{
             var timePicker = TimePickerFragment()
             
             //시계호출
