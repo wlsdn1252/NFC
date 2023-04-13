@@ -44,9 +44,9 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
     }
     
     //norification 설정
-    fun getChannelNotification():NotificationCompat.Builder{
+    fun getChannelNotification(time: String?):NotificationCompat.Builder{
         return NotificationCompat.Builder(applicationContext, channelID)
-            .setContentTitle("제목")
+            .setContentTitle(time)
             .setContentText("알람울림")
             .setSmallIcon(R.drawable.ic_launcher_background)
     }

@@ -35,7 +35,7 @@ class FirstFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        getData()
+        //getData()
     }
 
     // 유저프로필 클릭시 내 정보 페이지로 이동
