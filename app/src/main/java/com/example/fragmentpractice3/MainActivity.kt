@@ -1,30 +1,30 @@
 package com.example.fragmentpractice3
 
 import android.annotation.SuppressLint
+import android.app.AlarmManager
 import android.app.AlertDialog
 import android.app.PendingIntent
+import android.app.TimePickerDialog
 import android.content.ContentValues
+import android.content.Context
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.nfc.NfcAdapter
 import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RelativeLayout
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.example.fragmentpractice3.adapters.MainAdapter
-import com.example.fragmentpractice3.R
 import com.example.fragmentpractice3.fragments.FirstFragment
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_page_edit.*
 import kotlinx.android.synthetic.main.fragment_first.*
+import java.text.DateFormat
+import java.util.*
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
     private lateinit var mAdapter : MainAdapter
     private var nfcAdapter: NfcAdapter? = null
@@ -33,9 +33,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val currentLayoutId = findViewById<View>(android.R.id.content).rootView.id
-        Log.v("currentLayout", "$currentLayoutId")
 
         mAdapter = MainAdapter(supportFragmentManager)
         mainViewPager.adapter = mAdapter
@@ -60,11 +57,38 @@ class MainActivity : AppCompatActivity() {
 
             val id = bytesToHex(tag.id)
             Log.v("READ", "READED ID = $id")
-            val isInserted: Boolean = dbHelper!!.insert_check(id)
+
+            val isInserted: Boolean = dbHelper!!.insertCheck(id)
+
             if (!isInserted) {
                 insertID(id)
-            } else
-                deleteId(id)
+
+            } else {
+                if (FirstFragment.isDelete)
+                    deleteId(id)
+
+                else {
+                    Log.v("INSERTED", "INSERTED")
+
+                    val data = dbHelper!!.getData(id)
+                    Log.v(
+                        "DATA",
+                        "id : ${data.id} || act : ${data.activity} || status : ${data.status}"
+                    )
+
+                    if (data.status == 1) {
+                        Toast.makeText(
+                            this,
+                            "${data.id}의 동작 ${data.activity}을/를 성공적으로 마쳤습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        data.status = 0
+                        dbHelper!!.updateData(data)
+
+                    } else
+                        Toast.makeText(this, "${data.id}는 이미 동작을 끝냈습니다.", Toast.LENGTH_SHORT).show()
+                }
+            }
         }
     }
 
@@ -109,13 +133,14 @@ class MainActivity : AppCompatActivity() {
         val datalist = dbHelper!!.getAllData()
 
         for (each in datalist) {
-            val data = Data(each.id, each.activity)
-            textView.text = "${textView.text}${data.id} : ${data.activity}\n"
+            textView.text = "${textView.text}${each.id} : ${each.activity}\n"
         }
     }
     @SuppressLint("ResourceType")
     private fun insertID(id: String) {
         val textView:TextView = findViewById(R.id.text1_1)
+
+        var timePicker = TimePickerFragment()
 
         Log.v("INSERT", "ID : $id")
         val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
@@ -128,9 +153,12 @@ class MainActivity : AppCompatActivity() {
             val values = ContentValues()
             values.put("ID", id)
             values.put("activity", textValue)
+            values.put("status", 0)
             val newRowId = db.insert("activity", null, values)
             if (newRowId != -1L) {
                 Toast.makeText(this@MainActivity, "등록되었습니다.", Toast.LENGTH_SHORT).show()
+                timePicker.show(supportFragmentManager, "Time Picker")
+
             } else {
                 Toast.makeText(this@MainActivity, "등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -145,7 +173,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun deleteId(id: String) {
         try {
-            val data = Data(id, null)
+            val data = Data(id, null, 0)
             dbHelper!!.deleteData(data)
             resetText()
             Toast.makeText(this@MainActivity, "$id 제거에 성공했습니다.", Toast.LENGTH_SHORT).show()
@@ -153,5 +181,40 @@ class MainActivity : AppCompatActivity() {
         }catch (e: Exception){
             Toast.makeText(this@MainActivity, "$id 제거에 실패했습니다.\n$e", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    override fun onTimeSet(timePicker: TimePicker?, hourOfDay: Int, min: Int) {
+        var c = Calendar.getInstance()
+
+        Log.v("TIMESET", "HOUR : $hourOfDay || MIN : $min")
+
+        //시간설정
+        c.set(Calendar.HOUR_OF_DAY, hourOfDay) //시
+        c.set(Calendar.MINUTE, min) // 분
+        c.set(Calendar.SECOND,0)    //초
+
+        // 알람설정
+        startAlarm(c)
+    }
+
+    private fun startAlarm(c: Calendar) {
+        Log.v("STARTALARM", "STARTALARM")
+
+        // 알람매니저 선언
+        val alarmManager: AlarmManager = getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(this, AlertReceiver::class.java)
+
+        //사용자가 선택한 알람 시간 데이터 담기
+        val curTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
+        intent.putExtra("time", curTime)
+
+
+        val pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_MUTABLE)
+
+        //설정 시간이 현재시간 이후라면 설정
+        if(c.before(Calendar.getInstance())){
+            c.add(Calendar.DATE, 1)
+        }
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
     }
 }

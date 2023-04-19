@@ -2,6 +2,7 @@ package com.example.fragmentpractice3.fragments
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,6 @@ import com.example.fragmentpractice3.*
 import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
-
-    private var isDelete = false
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -29,8 +28,7 @@ class FirstFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         clickGoToMyInfo()
         mainPageEdit()
-
-
+        mainPageDelete()
     }
 
     override fun onResume() {
@@ -54,6 +52,18 @@ class FirstFragment : Fragment() {
             // Intent(출발지, 도착지)
             val myIntent = Intent(requireContext(), MainPageEditActivity::class.java)
             startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
+        }
+    }
+
+    fun mainPageDelete(){
+        mainPageDelete.setOnClickListener {
+            isDelete = !isDelete
+
+            if (isDelete)
+                mainPageDelete.setTextColor(Color.parseColor("#FF0000"))
+
+            else
+                mainPageDelete.setTextColor(Color.parseColor("#000000"))
         }
     }
 
@@ -83,4 +93,7 @@ class FirstFragment : Fragment() {
 //
 //                parentLayout.addView(textView)
 //            }*/
+    companion object{
+        var isDelete = false
+    }
         }

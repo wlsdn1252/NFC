@@ -43,7 +43,11 @@ class NotificationHelper(base: Context?) : ContextWrapper(base) {
         return getSystemService(NOTIFICATION_SERVICE) as NotificationManager
     }
     
-    //norification 설정
+    // norification 설정
+    // 탭에 종속된 알람이라 그 안에 별개로 들어가있는 NFC ID로 분리해서 시간을 등록해둬야 함
+    // 이후, 해당 시간이 되었을 때 등록된 ID값을 토대로 db에서 status부분을 건드려야 함
+    // ex) status == 1 : 동작 가능한 상태 || status == 0 : 정해진 시간에 대한 동작을 이미 끝내서 더이상 동작 불가능
+    // status는 상시 0으로 대기하다가, 지정된 시간이 지났을 때 1로 set된 후 이후 ID를 입력해 동작했을 때 다시 0으로 set 됨.
     fun getChannelNotification(time: String?):NotificationCompat.Builder{
         return NotificationCompat.Builder(applicationContext, channelID)
             //.setContentTitle(time)

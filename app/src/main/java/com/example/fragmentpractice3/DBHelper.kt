@@ -18,20 +18,12 @@ class DBHelper(context: Context?) :
         onCreate(db)
     }
 
-    fun addData(data: Data) {
-        val db = this.writableDatabase
-        val values = ContentValues()
-        values.put(ID_COLUMN, data.id)
-        values.put(ACTIVITY_COLUMN, data.activity)
-        db.insert(TABLE_NAME, null, values)
-        db.close()
-    }
-
     fun updateData(data: Data) {
         val db = this.writableDatabase
         val values = ContentValues()
         values.put(ID_COLUMN, data.id)
         values.put(ACTIVITY_COLUMN, data.activity)
+        values.put(STATUS_COLUMN, 0)
         db.update(TABLE_NAME, values, "$ID_COLUMN = ?", arrayOf(data.id))
         db.close()
     }
@@ -46,7 +38,7 @@ class DBHelper(context: Context?) :
         val db = this.readableDatabase
         val cursor = db.query(
             TABLE_NAME,
-            arrayOf(ID_COLUMN, ACTIVITY_COLUMN),
+            arrayOf(ID_COLUMN, ACTIVITY_COLUMN, STATUS_COLUMN),
             "$ID_COLUMN=?",
             arrayOf(id),
             null,
@@ -55,13 +47,13 @@ class DBHelper(context: Context?) :
             null
         )
         cursor?.moveToFirst()
-        val data = Data(cursor!!.getString(0), cursor.getString(1))
+        val data = Data(cursor.getString(0), cursor.getString(1), cursor.getInt(2))
         cursor.close()
         db.close()
         return data
     }
 
-    fun insert_check(id: String): Boolean {
+    fun insertCheck(id: String): Boolean {
         var check = false
         val db = this.readableDatabase
         val cursor = db.query(
@@ -89,7 +81,7 @@ class DBHelper(context: Context?) :
         while(cursor.moveToNext()) {
             val id = cursor.getString(cursor.getColumnIndex(ID_COLUMN))
             val activity = cursor.getString(cursor.getColumnIndex(ACTIVITY_COLUMN))
-            dataList.add(Data(id, activity))
+            dataList.add(Data(id, activity, 0))
         }
 
         cursor.close()
@@ -102,9 +94,11 @@ class DBHelper(context: Context?) :
         private const val DATABASE_NAME = "activity_db"
         private const val TABLE_NAME = "activity"
         private const val ID_COLUMN = "id"
+        private const val STATUS_COLUMN = "status"
         private const val ACTIVITY_COLUMN = "activity"
         private const val CREATE_TABLE = ("CREATE TABLE " + TABLE_NAME + "("
                 + ID_COLUMN + " TEXT PRIMARY KEY,"
-                + ACTIVITY_COLUMN + " TEXT" + ")")
+                + ACTIVITY_COLUMN + " TEXT,"
+                + STATUS_COLUMN + " BOOLEAN)")
     }
 }
