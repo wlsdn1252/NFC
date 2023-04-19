@@ -44,17 +44,28 @@
         app:layout_constraintTop_toBottomOf="@id/mainPageMainTextView"
         app:layout_constraintStart_toStartOf="parent"/>
 
+
     <TextView
         android:id="@+id/mainPageEdit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="편집"
+        android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:textColor="@color/black"
         app:layout_constraintStart_toStartOf="@id/mainPageUserInfo"
-        app:layout_constraintTop_toTopOf="@id/mainPageMedi"/>
+        app:layout_constraintTop_toTopOf="@id/mainPageMedi" />
 
+    <TextView
+        android:id="@+id/mainPageDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="삭제"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/mainPageEdit"
+        app:layout_constraintTop_toBottomOf="@+id/mainPageLayout1" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/mainPageLayout1"

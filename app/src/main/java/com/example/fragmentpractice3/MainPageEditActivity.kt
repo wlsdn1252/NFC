@@ -14,7 +14,6 @@ import java.text.DateFormat
 import java.util.Calendar
 
 class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_page_edit)

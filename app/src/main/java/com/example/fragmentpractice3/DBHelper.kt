@@ -1,5 +1,6 @@
 package com.example.fragmentpractice3
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
@@ -77,6 +78,23 @@ class DBHelper(context: Context?) :
         cursor.close()
         db.close()
         return check
+    }
+
+    @SuppressLint("Range")
+    fun getAllData(): MutableList<Data> {
+        val dataList = mutableListOf<Data>()
+        val db = this.readableDatabase
+        val cursor = db.rawQuery("SELECT * FROM $TABLE_NAME", null)
+
+        while(cursor.moveToNext()) {
+            val id = cursor.getString(cursor.getColumnIndex(ID_COLUMN))
+            val activity = cursor.getString(cursor.getColumnIndex(ACTIVITY_COLUMN))
+            dataList.add(Data(id, activity))
+        }
+
+        cursor.close()
+        db.close()
+        return dataList
     }
 
     companion object {
