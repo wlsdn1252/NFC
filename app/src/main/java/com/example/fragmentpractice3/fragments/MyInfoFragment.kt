@@ -12,7 +12,7 @@ import com.example.fragmentpractice3.MainActivity
 import com.example.fragmentpractice3.MyInfoActivity
 import com.example.fragmentpractice3.R
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.fragment_second.*
+
 
 class MyInfoFragment : Fragment() {
 
