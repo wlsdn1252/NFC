@@ -14,22 +14,22 @@ import com.example.fragmentpractice3.*
 import kotlinx.android.synthetic.main.fragment_first.*
 
 class FirstFragment : Fragment() {
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_first,container,false)
-    }
+//    override fun onCreateView(
+//        inflater: LayoutInflater,
+//        container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View? {
+//        return inflater.inflate(R.layout.fragment_first,container,false)
+//    }
 
 
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        clickGoToMyInfo()
-        mainPageEdit()
-        mainPageDelete()
-    }
+//    override fun onActivityCreated(savedInstanceState: Bundle?) {
+//        super.onActivityCreated(savedInstanceState)
+//        clickGoToMyInfo()
+//        mainPageEdit()
+//        mainPageDelete()
+//    }
 
     override fun onResume() {
         super.onResume()
@@ -37,35 +37,35 @@ class FirstFragment : Fragment() {
     }
 
     // 유저프로필 클릭시 내 정보 페이지로 이동
-   fun clickGoToMyInfo(){
-        mainPageUserInfo.setOnClickListener {
-            // 다른 화면으로 이동하기
-            // Intent(출발지, 도착지)
-            val myIntent = Intent(requireContext(), MyInfoActivity::class.java)
-            startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
-        }
-    }
+//   fun clickGoToMyInfo(){
+//        mainPageUserInfo.setOnClickListener {
+//            // 다른 화면으로 이동하기
+//            // Intent(출발지, 도착지)
+//            val myIntent = Intent(requireContext(), MyInfoActivity::class.java)
+//            startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
+//        }
+//    }
+//
+//    fun mainPageEdit(){
+//        mainPageEdit.setOnClickListener {
+//            // 다른 화면으로 이동하기
+//            // Intent(출발지, 도착지)
+//            val myIntent = Intent(requireContext(), MainPageEditActivity::class.java)
+//            startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
+//        }
+//    }
 
-    fun mainPageEdit(){
-        mainPageEdit.setOnClickListener {
-            // 다른 화면으로 이동하기
-            // Intent(출발지, 도착지)
-            val myIntent = Intent(requireContext(), MainPageEditActivity::class.java)
-            startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
-        }
-    }
-
-    fun mainPageDelete(){
-        mainPageDelete.setOnClickListener {
-            isDelete = !isDelete
-
-            if (isDelete)
-                mainPageDelete.setTextColor(Color.parseColor("#FF0000"))
-
-            else
-                mainPageDelete.setTextColor(Color.parseColor("#000000"))
-        }
-    }
+//    fun mainPageDelete(){
+//        mainPageDelete.setOnClickListener {
+//            isDelete = !isDelete
+//
+//            if (isDelete)
+//                mainPageDelete.setTextColor(Color.parseColor("#FF0000"))
+//
+//            else
+//                mainPageDelete.setTextColor(Color.parseColor("#000000"))
+//        }
+//    }
 
     // 알람 편집 후 알람 데이터 들고오가
  /*   fun getData(){

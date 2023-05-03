@@ -15,7 +15,6 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import com.example.fragmentpractice3.adapters.MainAdapter
 import com.example.fragmentpractice3.fragments.FirstFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_page_edit.*
@@ -26,7 +25,6 @@ import java.util.*
 
 class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
-    private lateinit var mAdapter : MainAdapter
     private var nfcAdapter: NfcAdapter? = null
     private var dbHelper: DBHelper? = null
 
@@ -34,9 +32,15 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        mAdapter = MainAdapter(supportFragmentManager)
-        mainViewPager.adapter = mAdapter
-        mainTabLayout.setupWithViewPager(mainViewPager)
+        // 편집 페이지로 이동
+        mainPageEdit()
+        
+        // 메인페이지에서 유저정보 클릭시 이동
+        mainPageUserInfo()
+
+//        mAdapter = MainAdapter(supportFragmentManager)
+//        mainViewPager.adapter = mAdapter
+//        mainTabLayout.setupWithViewPager(mainViewPager)
 
         // NFC 어댑터 가져오기
         nfcAdapter = NfcAdapter.getDefaultAdapter(this)
@@ -217,4 +221,25 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
         }
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, c.timeInMillis, pendingIntent)
     }
+
+
+        fun mainPageEdit(){
+            mainPageEdit.setOnClickListener {
+                // 다른 화면으로 이동하기
+                // Intent(출발지, 도착지)
+                val myIntent = Intent(this, MainPageEditActivity::class.java)
+                startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
+            }
+        }
+
+        // 메인페이지 사용자정보 클릭시
+        fun mainPageUserInfo(){
+            mainPageUserInfo.setOnClickListener {
+                // 다른 화면으로 이동하기
+                // Intent(출발지, 도착지)
+                val myIntent = Intent(this, MyInfoActivity::class.java)
+                startActivity(myIntent) // 출발지, 도착지 정보가담긴 myIntent를 넣어준다.
+            }
+        }
+
 }
