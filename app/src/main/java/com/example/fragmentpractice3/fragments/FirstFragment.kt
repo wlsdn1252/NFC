@@ -11,7 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.fragmentpractice3.*
-import kotlinx.android.synthetic.main.fragment_first.*
+
 
 class FirstFragment : Fragment() {
 //    override fun onCreateView(

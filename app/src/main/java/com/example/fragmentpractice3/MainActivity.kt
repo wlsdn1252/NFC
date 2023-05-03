@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.fragmentpractice3.fragments.FirstFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_page_edit.*
-import kotlinx.android.synthetic.main.fragment_first.*
 import java.text.DateFormat
 import java.util.*
 
