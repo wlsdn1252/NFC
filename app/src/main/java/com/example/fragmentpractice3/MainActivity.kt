@@ -15,10 +15,14 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.example.fragmentpractice3.adapters.Adapters
+import com.example.fragmentpractice3.databinding.ActivityMainBinding
+import com.example.fragmentpractice3.datas.ReData
 import com.example.fragmentpractice3.fragments.FirstFragment
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.item_view.*
 import java.text.DateFormat
 import java.util.*
 
@@ -27,16 +31,18 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
 
     private var nfcAdapter: NfcAdapter? = null
     private var dbHelper: DBHelper? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         // 첫 메인화면에 관하여
         startMainActivity()
 
         // 편집화면 이동
-        goToMainEdit()
+//        goToMainEdit()
 
         // 내 정보페이지 이동
         mainPageUserInfo.setOnClickListener {
@@ -51,6 +57,17 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
             Toast.makeText(this, "NFC 기능이 꺼져 있습니다. NFC를 켜주세요.", Toast.LENGTH_LONG).show()
         }
         dbHelper = DBHelper(this)
+
+
+        // ***********************************리사이클러뷰 예시***************************************
+        val list = ArrayList<ReData>()
+        list.add(ReData("1","aaa"))
+
+
+        val adapter = Adapters(list)
+        binding.lstUser.adapter = adapter
+
+
     }
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
@@ -199,10 +216,11 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
         }
     }
 
-    fun goToMainEdit(){
-        mainPageEdit.setOnClickListener(){
-            startActivity(Intent(this,MainPageEditActivity::class.java))
-        }
+
+
+    // 새로 만들기 버튼 클릭 시
+    fun goToNewAdd(){
+
     }
 
 
