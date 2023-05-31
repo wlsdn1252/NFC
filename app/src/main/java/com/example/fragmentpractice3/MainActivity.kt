@@ -66,8 +66,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, Ad
         // 로그인이 안되있으면 로그인 액티비티로 이동
         //startMainActivity()
 
-        // 편집화면 이동
-//        goToMainEdit()
+
 
 
 
@@ -87,6 +86,11 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, Ad
                 // startActivity대신 사용한다.
                 updateAddWordResult.launch(it)
             }
+        }
+        
+        // 지우기
+        binding.mainPageUserInfo.setOnClickListener {
+            delete()
         }
 
 

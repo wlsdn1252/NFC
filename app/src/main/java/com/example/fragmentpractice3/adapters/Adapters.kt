@@ -8,6 +8,10 @@ import com.example.fragmentpractice3.databinding.ItemViewBinding
 import com.example.fragmentpractice3.datas.ReData
 
 
+// 리사이클러뷰.어댑터를 상속받을 때 <>안에 뷰홀더를 받아야함
+// 그래서 이너클래스로 뷰홀더를 만들었다.
+// 이너클래스라서 사용할 때는 클래스이름.클래스이름을 쓴다.
+// WordAdapter는 Word데이터클래스를 변경가능한 리스트 형태로 받는다.
 class Adapters(
     val list: MutableList<ReData>,
     // 클릭리스너의 속성을 ItemClickListener(인터페이스)로 정의
@@ -37,6 +41,7 @@ class Adapters(
         holder.bind(word)
         // 클릭메서드 처리를 위한 구문
         holder.itemView.setOnClickListener{itemClickListener?.onClick(word)}
+
     }
 
     // 뷰홀더클래스의 속성은 리사이클러뷰.뷰홀더를 속성으로 받는다.
@@ -45,6 +50,7 @@ class Adapters(
             binding.apply {
                 mainPageMedi.text =word.mediName
                 text11.text = word.textVal
+                mainPageEdit.text = "편집"
             }
         }
     }
@@ -55,5 +61,6 @@ class Adapters(
     interface ItemClickListener{
         fun onClick(word:ReData)
     }
+
 
 }
