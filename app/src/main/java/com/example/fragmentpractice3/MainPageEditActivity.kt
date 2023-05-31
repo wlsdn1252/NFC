@@ -5,22 +5,28 @@ import android.app.PendingIntent
 import android.app.TimePickerDialog
 import android.content.Context
 import android.content.Intent
+import android.icu.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TimePicker
 import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_main_page_edit.*
+import com.example.fragmentpractice3.database.AppDatabase
+import com.example.fragmentpractice3.databinding.ActivityMainPageEditBinding
+import com.example.fragmentpractice3.datas.ReData
 import java.text.DateFormat
-import java.util.Calendar
+import java.util.*
 
 class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener {
+
+    private lateinit var binding: ActivityMainPageEditBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main_page_edit)
+        binding = ActivityMainPageEditBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         //getTimeData()
 
         // 알람 설정
-        editAddTmage.setOnClickListener{
+        binding.editAddTmage.setOnClickListener{
             var timePicker = TimePickerFragment()
             
             //시계호출
@@ -28,9 +34,14 @@ class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetList
         }
 
         // 알람 취소 버튼
-        alarm_cancle_Button.setOnClickListener {
+        binding.alarmCancleButton.setOnClickListener {
             // 알람 취소 함수
             cancleAlarm()
+        }
+
+        // 저장
+        binding.addButton2.setOnClickListener {
+            add()
         }
 
     }
@@ -76,11 +87,10 @@ class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetList
         startAlarm(c)
     }
 
+    // 시간설정하면 해당 시간을 화면에 뿌린다.
     private fun updateTimeText(c: Calendar) {
         var curTime = DateFormat.getTimeInstance(DateFormat.SHORT).format(c.time)
-
-        timeText.append("알람 시간: ")
-        timeText.append(curTime)
+        binding.timeText.append(curTime)
     }
 
     private fun startAlarm(c: Calendar) {
@@ -109,7 +119,33 @@ class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetList
         var pendingIntent = PendingIntent.getBroadcast(this, 1, intent, PendingIntent.FLAG_MUTABLE)
 
         alarmManager.cancel(pendingIntent)
-        timeText.text = "알람 취소"
+        binding.timeText.text = "알람 취소"
+    }
+
+    // 추가버튼 눌렀을 때
+    private fun add(){
+        // 액티비티에 적혀있는 값들을 들고온다.
+        val text = binding.editTitleText.text.toString()
+        val time = binding.timeText.text.toString()
+        val word = ReData(text,time)
+
+
+        // 메인 UI쓰레드랑 겹치면 안된다. 쓰레드를 따로 생성
+        Thread{
+            AppDatabase.getInstance(this)?.wordDao()?.insert(word)
+            // 이건 뭐죠??
+            runOnUiThread{
+                Toast.makeText(this, "저장 완료", Toast.LENGTH_SHORT).show()
+            }
+            // 낭비최소화를 위한구문
+            // 데이터입력 후 저장버튼을 누르면
+            val intent = Intent().putExtra("isUpdate",true)
+            setResult(RESULT_OK,intent)
+            finish()
+        }.start()
+
+
+
     }
 
 

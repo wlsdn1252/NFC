@@ -1,55 +1,59 @@
 package com.example.fragmentpractice3.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import com.example.fragmentpractice3.MainPageEditActivity
-import com.example.fragmentpractice3.R
+import com.example.fragmentpractice3.databinding.ItemViewBinding
 import com.example.fragmentpractice3.datas.ReData
-import kotlinx.android.synthetic.main.item_view.*
-import kotlinx.android.synthetic.main.item_view.view.*
 
-class Adapters(private val items: ArrayList<ReData>) : RecyclerView.Adapter<Adapters.ViewHolder>() {
 
-    // 아이템의 개수 정의
-    override fun getItemCount(): Int = items.size
+class Adapters(
+    val list: MutableList<ReData>,
+    // 클릭리스너의 속성을 ItemClickListener(인터페이스)로 정의
+    private val itemClickListener: ItemClickListener? = null
+    ) : RecyclerView.Adapter<Adapters.WordViewHolder>() {
 
-    // 항목 뷰에 데이터 연결
-    override fun onBindViewHolder(holder: Adapters.ViewHolder, position: Int) {
 
-        val item = items[position]
-        val listener = View.OnClickListener { it ->
-            Toast.makeText(it.context, "Clicked -> ID : ${item.mediName}, Name : ${item.textVal}", Toast.LENGTH_SHORT).show()
-        }
-        holder.apply {
-            bind(listener, item)
-            itemView.tag = item
-        }
+    //WordAdapter클래스가 들고있는 list의 데이터 개수를 알려준다.
+    // 즉 Word데이터 클래스의에 들어있는 데이터 수???
+    override fun getItemCount(): Int {
+        return list.size
     }
 
-    // 항목에 사용할 View를 생성하고 ViewHolder를 반환
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val inflatedView = LayoutInflater.from(parent.context).inflate(R.layout.item_view, parent, false)
-        return ViewHolder(inflatedView)
+    // 뷰홀더를 만들 때
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
+        // 뷰를 그리기위한 인플레이터 선언
+        val inflater = parent.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        //
+        val binding = ItemViewBinding.inflate(inflater, parent,false)
+        return WordViewHolder(binding)
     }
 
-    // 각 항목에 필요한 기능을 구현
-    class ViewHolder(v:View): RecyclerView.ViewHolder(v){
-        private var view: View = v
-        fun bind(listener:View.OnClickListener, item:ReData){
-            view.mainPageMedi.text = item.mediName
-            view.text1_1.text = item. textVal
-            view.setOnClickListener(listener)
 
-            view.setOnClickListener() {
+    // onCreateViewHolder에서 만든 뷰홀더로 화면 UI와 데이터를 연결
+    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
+        val word = list[position]
+        holder.bind(word)
+        // 클릭메서드 처리를 위한 구문
+        holder.itemView.setOnClickListener{itemClickListener?.onClick(word)}
+    }
 
+    // 뷰홀더클래스의 속성은 리사이클러뷰.뷰홀더를 속성으로 받는다.
+    class WordViewHolder(private val binding: ItemViewBinding) : RecyclerView.ViewHolder(binding.root){
+        fun bind(word:ReData){
+            binding.apply {
+                mainPageMedi.text =word.mediName
+                text11.text = word.textVal
             }
-
         }
+    }
+
+    // 클릭리스너 구현을위한 인터페이스 설계
+    // 리사이클러뷰의 클릭리스너는 어댑터에서 구현해야함
+    // 메인액티비티에서 onClick함수 사용 예정
+    interface ItemClickListener{
+        fun onClick(word:ReData)
     }
 
 }

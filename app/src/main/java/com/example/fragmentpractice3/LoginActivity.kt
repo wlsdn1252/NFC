@@ -8,7 +8,6 @@ import android.widget.Toast
 import com.example.fragmentpractice3.databinding.ActivityLoginBinding
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
@@ -24,9 +23,6 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this, SingInActivity::class.java))
         }
 
-        mainText2.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
-        }
 
         //회원가입 액티비티에서 보낸 이메일과 비밀번호를 받는다.
         var email = intent.getStringExtra("email") ?: return
@@ -47,6 +43,11 @@ class LoginActivity : AppCompatActivity() {
                         Toast.makeText(this, "로그인 실패", Toast.LENGTH_SHORT).show()
                     }
                 }
+        }
+
+        // 로그인 하지 않고 메인으로 가기
+        binding.mainText2.setOnClickListener {
+            startActivity(Intent(this,MainActivity::class.java))
         }
 
     }
