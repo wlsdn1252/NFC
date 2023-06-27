@@ -96,6 +96,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, Ad
 
 
     }
+
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         // NFC 태그를 읽었을 때 호출되는 메소드
@@ -144,7 +145,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, Ad
             // Foreground Dispatch 설정
             nfcAdapter!!.enableForegroundDispatch(this, pendingIntent, null, null) // nfc태그시 뭐 되는데 뭐지
 
-            updateAddWord()//시간 설정 후  UI업데이트 시킴
+            //updateAddWord()//시간 설정 전  UI업데이트 시키네 설정 완료 후 UI업데이트 하도록 바꿔야함
         }
     }
     override fun onPause() {
@@ -335,6 +336,7 @@ class MainActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetListener, Ad
         selectedWord = word
 
     }
+
 
 
 }
