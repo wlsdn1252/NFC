@@ -8,6 +8,7 @@ import android.content.Intent
 import android.icu.text.SimpleDateFormat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.TimePicker
 import android.widget.Toast
 import com.example.fragmentpractice3.database.AppDatabase
@@ -127,7 +128,15 @@ class MainPageEditActivity : AppCompatActivity(), TimePickerDialog.OnTimeSetList
         // 액티비티에 적혀있는 값들을 들고온다.
         val text = binding.editTitleText.text.toString()
         val time = binding.timeText.text.toString()
-        val word = ReData(text,time)
+        
+        //NFC ID 받기
+        val sharedPrefs = getSharedPreferences("NFCID", Context.MODE_PRIVATE)
+        val value = sharedPrefs.getString("ID", "없음").toString()
+        Log.e("인텐트넘어온 아이디 : ","$value")
+
+
+
+        val word = ReData(text,time,value)
 
 
         // 메인 UI쓰레드랑 겹치면 안된다. 쓰레드를 따로 생성

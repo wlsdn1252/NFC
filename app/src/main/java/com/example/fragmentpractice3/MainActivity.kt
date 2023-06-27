@@ -37,7 +37,7 @@ import java.util.*
 class MainActivity : AppCompatActivity(), Adapters.ItemClickListener {
 
     private var nfcAdapter: NfcAdapter? = null
-    private var dbHelper: DBHelper? = null
+    //private var dbHelper: DBHelper? = null
     private lateinit var binding: ActivityMainBinding
     private lateinit var itemBinding : ItemViewBinding
 
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), Adapters.ItemClickListener {
         if (!nfcAdapter!!.isEnabled) {
             Toast.makeText(this, "NFC 기능이 꺼져 있습니다. NFC를 켜주세요.", Toast.LENGTH_LONG).show()
         }
-        dbHelper = DBHelper(this)
+       // dbHelper = DBHelper(this)
 
 
         initRecylerView()
@@ -103,6 +103,14 @@ class MainActivity : AppCompatActivity(), Adapters.ItemClickListener {
         if (tag != null) {
 
             val id = bytesToHex(tag.id)
+
+            //NFC ID 주기
+            val sharedPrefs = getSharedPreferences("NFCID", Context.MODE_PRIVATE)
+            val editor = sharedPrefs.edit()
+            editor.putString("ID", id)
+            editor.apply()
+
+
             Log.e("엔에프씨 : ","$id")
             // 알람설정 페이지로 이동 후 알람설정 후 UI업데이트
             Intent(this, MainPageEditActivity::class.java).let{
@@ -173,54 +181,54 @@ class MainActivity : AppCompatActivity(), Adapters.ItemClickListener {
         }
         return sb.toString()
     }
-    private fun resetText() {
-        val textView: TextView = findViewById(R.id.text1_1)
-        textView.text = ""
-        val datalist = dbHelper!!.getAllData()
-        for (each in datalist) {
-            textView.text = "${textView.text}${each.id} : ${each.activity}\n"
-        }
-    }
-    @SuppressLint("ResourceType")
-    private fun insertID(id: String) {
-        val textView:TextView = findViewById(R.id.text1_1)
-        var timePicker = TimePickerFragment()
-        Log.v("INSERT", "ID : $id")
-        val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
-        builder.setTitle("값 입력")
-        val input = EditText(this@MainActivity)
-        builder.setView(input)
-        builder.setPositiveButton("등록") { dialog, _ ->
-            val textValue = input.text.toString()
-            val db: SQLiteDatabase = dbHelper!!.writableDatabase
-            val values = ContentValues()
-            values.put("ID", id)
-            values.put("activity", textValue)
-            values.put("status", 0)
-            val newRowId = db.insert("activity", null, values)
-            if (newRowId != -1L) {
-                Toast.makeText(this@MainActivity, "등록되었습니다.", Toast.LENGTH_SHORT).show()
-                timePicker.show(supportFragmentManager, "Time Picker")
-            } else {
-                Toast.makeText(this@MainActivity, "등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
-            }
-            db.close()
-            dialog.dismiss()
-            textView.text = "${textView.text}$id : $textValue \n"
-        }
-        builder.setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
-        builder.show()
-    }
-    private fun deleteId(id: String) {
-        try {
-            val data = Data(id, null, 0)
-            dbHelper!!.deleteData(data)
-            resetText()
-            Toast.makeText(this@MainActivity, "$id 제거에 성공했습니다.", Toast.LENGTH_SHORT).show()
-        }catch (e: Exception){
-            Toast.makeText(this@MainActivity, "$id 제거에 실패했습니다.\n$e", Toast.LENGTH_SHORT).show()
-        }
-    }
+//    private fun resetText() {
+//        val textView: TextView = findViewById(R.id.text1_1)
+//        textView.text = ""
+//        val datalist = dbHelper!!.getAllData()
+//        for (each in datalist) {
+//            textView.text = "${textView.text}${each.id} : ${each.activity}\n"
+//        }
+//    }
+//    @SuppressLint("ResourceType")
+//    private fun insertID(id: String) {
+//        val textView:TextView = findViewById(R.id.text1_1)
+//        var timePicker = TimePickerFragment()
+//        Log.v("INSERT", "ID : $id")
+//        val builder: AlertDialog.Builder = AlertDialog.Builder(this@MainActivity)
+//        builder.setTitle("값 입력")
+//        val input = EditText(this@MainActivity)
+//        builder.setView(input)
+//        builder.setPositiveButton("등록") { dialog, _ ->
+//            val textValue = input.text.toString()
+//            val db: SQLiteDatabase = dbHelper!!.writableDatabase
+//            val values = ContentValues()
+//            values.put("ID", id)
+//            values.put("activity", textValue)
+//            values.put("status", 0)
+//            val newRowId = db.insert("activity", null, values)
+//            if (newRowId != -1L) {
+//                Toast.makeText(this@MainActivity, "등록되었습니다.", Toast.LENGTH_SHORT).show()
+//                timePicker.show(supportFragmentManager, "Time Picker")
+//            } else {
+//                Toast.makeText(this@MainActivity, "등록에 실패했습니다.", Toast.LENGTH_SHORT).show()
+//            }
+//            db.close()
+//            dialog.dismiss()
+//            textView.text = "${textView.text}$id : $textValue \n"
+//        }
+//        builder.setNegativeButton("취소") { dialog, _ -> dialog.cancel() }
+//        builder.show()
+//    }
+//    private fun deleteId(id: String) {
+//        try {
+//            val data = Data(id, null, 0)
+//            dbHelper!!.deleteData(data)
+//            resetText()
+//            Toast.makeText(this@MainActivity, "$id 제거에 성공했습니다.", Toast.LENGTH_SHORT).show()
+//        }catch (e: Exception){
+//            Toast.makeText(this@MainActivity, "$id 제거에 실패했습니다.\n$e", Toast.LENGTH_SHORT).show()
+//        }
+//    }
    /* override fun onTimeSet(timePicker: TimePicker?, hourOfDay: Int, min: Int) {
         var c = Calendar.getInstance()
         Log.v("TIMESET", "HOUR : $hourOfDay || MIN : $min")

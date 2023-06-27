@@ -7,5 +7,6 @@ import androidx.room.PrimaryKey
 data class ReData(
     val mediName : String,
     val textVal : String,
+    val NFCId : String,
     @PrimaryKey(autoGenerate = true)val id: Int = 0,
 )

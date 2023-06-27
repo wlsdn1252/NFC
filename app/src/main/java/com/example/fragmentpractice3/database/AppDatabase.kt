@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.fragmentpractice3.dao.WordDao
 import com.example.fragmentpractice3.datas.ReData
 
-@Database(entities = [ReData::class], version = 2)
+@Database(entities = [ReData::class], version = 3)
 abstract class AppDatabase : RoomDatabase(){
 
     // WordDao인터페이스 들고오기
@@ -20,7 +20,7 @@ abstract class AppDatabase : RoomDatabase(){
                     INSTANCE = Room.databaseBuilder(
                         context.applicationContext,
                         AppDatabase::class.java,
-                        "app-database2.db"
+                        "app-database3.db"
                     ).build()
                 }
 
